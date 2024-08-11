@@ -61,10 +61,13 @@ export const addOrder = async ({ clientId, shippingAddressId, products }: IAddOr
       });
     }
 
-    const newOrder = await Order.create({
-      clientId,
-      shippingAddressId,
-    });
+    const newOrder = await Order.create(
+      {
+        clientId,
+        shippingAddressId,
+      },
+      { transaction: t },
+    );
 
     const productsIds = products.map((product: IProduct) => product.id);
 
@@ -82,8 +85,24 @@ export const addOrder = async ({ clientId, shippingAddressId, products }: IAddOr
       await ProductsByOrder.create({ productId: products[i].id, orderId: newOrder.id, quantity: products[i].quantity }, { transaction: t });
     }
 
+    const resOrder = await Order.findOne({
+      where: {
+        id: newOrder.id,
+      },
+      include: [
+        {
+          model: Product,
+          as: "products",
+          through: {
+            attributes: ["quantity"],
+          },
+        },
+      ],
+      transaction: t,
+    });
+
     await t.commit();
-    return newOrder;
+    return resOrder;
   } catch (error) {
     await t.rollback();
     console.log(error);
