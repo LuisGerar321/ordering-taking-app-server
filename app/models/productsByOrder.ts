@@ -16,6 +16,9 @@ class ProductsByOrder extends Model<ProductsByOrder> {
   @ForeignKey(() => Product)
   @Column
   productId: number;
+
+  @Column
+  quantity: number;
 }
 
 export default ProductsByOrder;

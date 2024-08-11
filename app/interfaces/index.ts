@@ -18,8 +18,12 @@ export interface IPagMapToModel {
   limit: number;
 }
 
+export interface IProduct {
+  id: number;
+  quantity: number;
+}
 export interface IAddOrder {
   clientId: number;
   shippingAddressId: number;
-  products: number[];
+  products: IProduct[];
 }
