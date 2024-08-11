@@ -6,7 +6,7 @@ import { IPaginationResponse } from "../interfaces";
 export const getClients = async (page: string, pagesize: string): Promise<IPaginationResponse> => {
   try {
     const { rows, count } = await Client.findAndCountAll({
-      ...pagMapToModel(page, pagesize),
+      ...(page && pagesize ? pagMapToModel(page, pagesize) : {}),
     });
 
     return pagination(count, page, pagesize, rows);

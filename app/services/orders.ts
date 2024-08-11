@@ -21,7 +21,7 @@ export const getOrders = async (page: string, pagesize: string): Promise<IPagina
         },
       ],
       distinct: true,
-      ...pagMapToModel(page, pagesize),
+      ...(page && pagesize ? pagMapToModel(page, pagesize) : {}),
     });
 
     return pagination(count, page, pagesize, rows);

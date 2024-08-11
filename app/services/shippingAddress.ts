@@ -6,7 +6,7 @@ import { IPaginationResponse } from "../interfaces";
 export const getShippingAddresses = async (page: string, pagesize: string): Promise<IPaginationResponse> => {
   try {
     const { rows, count } = await ShippingAddress.findAndCountAll({
-      ...pagMapToModel(page, pagesize),
+      ...(page && pagesize ? pagMapToModel(page, pagesize) : {}),
     });
 
     return pagination(count, page, pagesize, rows);
