@@ -1,7 +1,9 @@
+import { ErrorResponse } from "../utils/Errors";
+
 export interface IResponse {
   status: number;
   message: string;
-  data?: any;
+  data?: IPaginationResponse | any;
 }
 
 export interface IPaginationResponse {
