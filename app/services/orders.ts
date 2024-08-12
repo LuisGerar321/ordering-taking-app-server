@@ -12,7 +12,16 @@ import ProductsByOrder from "../models/productsByOrder";
 export const getOrders = async (page: string, pagesize: string): Promise<IPaginationResponse> => {
   try {
     const { rows, count } = await Order.findAndCountAll({
+      attributes: { exclude: ["clientId", "shippingAddressId"] },
       include: [
+        {
+          model: Client,
+          as: "client",
+        },
+        {
+          model: ShippingAddress,
+          as: "shippingAddress",
+        },
         {
           model: Product,
           as: "products",
@@ -89,7 +98,16 @@ export const addOrder = async ({ clientId, shippingAddressId, products }: IAddOr
       where: {
         id: newOrder.id,
       },
+      attributes: { exclude: ["clientId", "shippingAddressId"] },
       include: [
+        {
+          model: Client,
+          as: "client",
+        },
+        {
+          model: ShippingAddress,
+          as: "shippingAddress",
+        },
         {
           model: Product,
           as: "products",
