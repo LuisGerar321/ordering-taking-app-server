@@ -25,12 +25,19 @@ cd ordering-taking-app-server
 Create a .env file in the root directory of the project and add your environment variables:
 
 ```
-  DB_HOST=db
-  DB_PORT=3306
-  DB_USER=user
-  DB_PASSWORD=password
-  DB_NAME=mydatabase
-  SERVER_HOST=0.0.0.0
+#API Version
+API_VERSION = "v1"
+
+#Server Config
+SERVER_PORT = 3001
+SERVER_HOST = "localhost"
+
+
+#Database Configuration
+DB_NAME = "mydatabase"
+DB_USER_NAME = "user"
+DB_PASS = "password"
+
 ```
 
 ### 3. Build and Run the Containers
