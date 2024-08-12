@@ -42,7 +42,7 @@ DB_PASS = "password"
 
 ### 3. Build and Run the Containers
 
-Use Docker Compose to build and start the containers:
+Use Docker Compose to build and start the containers (If an error ocurrs try to retry docker-compose up):
 
 ```bash
 docker-compose up --build
